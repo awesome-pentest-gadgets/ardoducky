@@ -35,7 +35,7 @@ keyCodes = {
     "esc":      "KEY_ESC",
     "back":     "KEY_BACKSPACE",
     "tab":      "KEY_TAB",
-    
+
     "ins":      "KEY_INSERT",
     "home":     "KEY_HOME",
     "pgup":     "KEY_PAGE_UP",
@@ -44,7 +44,7 @@ keyCodes = {
     "pgdn":     "KEY_PAGE_DOWN",
 
     "caps":     "KEY_CAPS_LOCK",
-    
+
     "f1":       "KEY_F1",
     "f2":       "KEY_F2",
     "f3":       "KEY_F3",
@@ -192,7 +192,7 @@ for line in inf:
         ads_data.append(0) # Dummy target
 
     # Unknown
-    else:
+    elif cmd != '#':
         print("]]] WARNING: Unhandled command '" + cmd + "'")
 
 # Close input file
