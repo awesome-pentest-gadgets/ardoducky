@@ -176,20 +176,34 @@ for line in inf:
         var = args[0]
         lbl = args[1]
 
-        if var[0] != "$":
-            print("ERROR: '" + var + "' is not a valid variable!")
-            exit()
-
-        if not var[1:] in sysvars:
+        if not var in sysvars:
             print("ERROR: Sysvar '" + var[1:] + "' not found!")
             exit()
 
         ads_data.append(7) # Jump if sysvar true
-        ads_data.append(sysvars[var[1:]])
+        ads_data.append(sysvars[var])
 
         # Don't put in the real jump. We're not sure the label exist yet.
         jumps[len(ads_data)] = lbl
         ads_data.append(0) # Dummy target
+
+    # Light
+    elif cmd == "light":
+        if arg == "on" or arg == "off":
+            ads_data.append(8)
+            ads_data.append(1 if arg == "on" else 0)
+        else:
+            print("ERROR: Invalid light state '" + arg + "'")
+            exit()
+
+    # Toggle caps/num/scroll
+    elif cmd == "toggle":
+        ads_data.append(9)
+        if arg in sysvars:
+            ads_data.append(sysvars[arg])
+        else:
+            print("ERROR: Invalid key '" + arg + "'")
+            exit()
 
     # Unknown
     elif cmd != '#':
